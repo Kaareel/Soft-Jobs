@@ -14,16 +14,16 @@ const credenciales = {
 const pool = new Pool(credenciales);
 
 const registrarUsuario = async (usuario) => {
-    let { email, password, rol, language } = usuario
+    let { email, password, rol, lenguage } = usuario
     const passwordEncriptada = bcrypt.hashSync(password)
     password = passwordEncriptada
-    const values = [email, passwordEncriptada, rol, language]
+    const values = [email, passwordEncriptada, rol, lenguage]
     const consulta = "INSERT INTO usuarios values (DEFAULT, $1, $2, $3, $4)"
     await pool.query(consulta, values)
     }
 
 const obtenerUsuarios = async (email) => {
-    const consulta = 'SELECT email,rol,language FROM usuarios WHERE email = $1'
+    const consulta = 'SELECT email,rol,lenguage FROM usuarios WHERE email = $1'
     const values = [email]
     const result = await pool.query(consulta, values)
     return result.rows
